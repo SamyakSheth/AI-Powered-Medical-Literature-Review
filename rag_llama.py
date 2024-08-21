@@ -32,9 +32,8 @@ from langchain_community.embeddings import OllamaEmbeddings
 
 
 class RAGBasedChatbot:
-    def __init__(self,db_faiss_path,huggingface_api_key=None):
+    def __init__(self,db_faiss_path):
          # Initialization of key variables and paths
-        self.huggingface_api_key = huggingface_api_key
         self.db_faiss_path = db_faiss_path
         self.loader = None
         self.docs = None
