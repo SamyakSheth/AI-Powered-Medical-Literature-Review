@@ -68,12 +68,12 @@ class RAGBasedChatbot:
     #         print(f"Error calculating confidence: {e}")
     #         return -1
 
-    # def clean_text(self, text):
-    #     # Cleans the extracted text by removing unwanted characters
-    #     allowed_punctuation = r'.,!?;:\-()\[\]%'
-    #     pattern = f'[^{string.ascii_letters + string.digits + string.whitespace + allowed_punctuation}]'
-    #     cleaned_text = re.sub(pattern, '', text)
-    #     return cleaned_text.lower()
+    def clean_text(self, text):
+        # Cleans the extracted text by removing unwanted characters
+        allowed_punctuation = r'.,!?;:\-()\[\]%'
+        pattern = f'[^{string.ascii_letters + string.digits + string.whitespace + allowed_punctuation}]'
+        cleaned_text = re.sub(pattern, '', text)
+        return cleaned_text.lower()
 
     # def process_page(self, page):
     #     # Processes each page to extract text and calculate OCR confidence
@@ -84,12 +84,12 @@ class RAGBasedChatbot:
     #     text = ' '.join(d_df.text)
     #     return page_conf, text
 
-    def load_document(self, file_path):
+    def load_document(self, file_path,api_key='llx-uZfKgkE2M3WrEbyC3Ftxyc1BWlcVWOvhPAWRl8kpq52xI2SP'):
         self.docs=[]
 
         ## Using LlamaParse
         
-        api_key = 'llx-9hf1pg34vJphjGTS9gMvy5cPHffQQNG4ZvPbgAo1jYYcvSTg' #a
+        #api_key = 'llx-9hf1pg34vJphjGTS9gMvy5cPHffQQNG4ZvPbgAo1jYYcvSTg' #a
         #api_key = 'llx-uZfKgkE2M3WrEbyC3Ftxyc1BWlcVWOvhPAWRl8kpq52xI2SP' #b
         #api_key = 'llx-xJTD207urMCJMYyvLhh22fZnkAmj0M7CNWIbed1ITpmc22SC' #c
         parser = LlamaParse(
@@ -214,7 +214,7 @@ class RAGBasedChatbot:
             model=model_name,
             temperature=self.temperature,
             format=self.format,
-            num_predict=self.num_predict
+            num_predict=256
         )
 
     def create_prompt_template(self,title,abstract):
